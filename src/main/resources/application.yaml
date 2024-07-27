@@ -1,0 +1,21 @@
+server:
+  port: 38080
+spring:
+  application:
+    name: challenge-tl-backend
+  datasource:
+    url: jdbc:h2:mem:apidb
+    driver-class-name: org.h2.Driver
+    username: api
+    password: api
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: none
+  h2:
+    console:
+      settings:
+        web-allow-others: true
+      enabled: true
+      path: /h2
+
