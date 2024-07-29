@@ -10,6 +10,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +26,7 @@ import java.util.UUID;
 
 @RequiredArgsConstructor
 @RestController
+@CrossOrigin(origins = "http://localhost:5173")
 @RequestMapping(value = "/products")
 public class ProductsController {
 
@@ -45,8 +47,10 @@ public class ProductsController {
 
     @GetMapping
     ResponseEntity<PagedModel<Product>> getAllProducts(@RequestParam(required = false, defaultValue = "0") Integer page,
-                                                       @RequestParam(required = false, defaultValue = "2") Integer pageSize) {
+                                                       @RequestParam(required = false, defaultValue = "2") Integer pageSize)
+            throws InterruptedException {
 
+        Thread.sleep(2000);
         Pageable paging = PageRequest.of(page, pageSize);
         return ResponseEntity.of(Optional.of(new PagedModel<>(productRepository.findAll(paging))));
     }
