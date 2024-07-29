@@ -14,4 +14,4 @@ INSERT INTO api.product VALUES
 INSERT INTO api.user_info VALUES
 ('a0705b40-5c0a-4e93-b10f-f13bd1edba3b', 'pepito', 'perez', 'pepito.perez@payu.com', 'DonPepe', '123456'),
 ('abdd2185-9234-4b01-8ec1-ecbb066c975b', 'admin', 'administrando', 'admin@payu.com', 'Admin', 'admin'),
-('9c157989-3e80-41c0-9594-1b65e970abd6', 'diego', 'borrero', 'diego.borrero@payu.com', 'Mort', '123456');
+('9c157989-3e80-41c0-9594-1b65e970abd6', 'diego', 'borrero', 'diego.borrero@payu.com', 'DxMortem', '123456');

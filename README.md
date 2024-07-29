@@ -18,3 +18,13 @@ For this project I decided to use the next stack:
 2. First build the project with `mvn clean install`
 3. To run it use: `java -jar target/challenge-tl-backend-0.0.1-SNAPSHOT.jar`
 
+# Data available for test
+There are 11 products already populated into the database
+Also you have 3 users, for your tests, 1 admin 2 normal users:
+
+| User     | Email                  | Password | isAdmin |
+|----------|------------------------|----------|---------|
+| Admin    | admin@payu.com         | admin    | true    |
+| DonPepe  | pepito.perez@payu.com  | 123456   | false   |
+| DxMortem | diego.borrero@payu.com | 123456   | false   |
+
