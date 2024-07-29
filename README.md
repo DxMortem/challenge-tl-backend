@@ -19,8 +19,9 @@ For this project I decided to use the next stack:
 3. To run it use: `java -jar target/challenge-tl-backend-0.0.1-SNAPSHOT.jar`
 
 # Data available for test
-There are 11 products already populated into the database
-Also you have 3 users, for your tests, 1 admin 2 normal users:
+
+## Users
+You have 3 users, for your tests, 1 admin 2 normal users:
 
 | User     | Email                  | Password | isAdmin |
 |----------|------------------------|----------|---------|
@@ -28,3 +29,8 @@ Also you have 3 users, for your tests, 1 admin 2 normal users:
 | DonPepe  | pepito.perez@payu.com  | 123456   | false   |
 | DxMortem | diego.borrero@payu.com | 123456   | false   |
 
+## Products
+There are 11 products already populated into the database, 
+
+The endpoint that is used to query all the products has a little delay (2 seg) to emulate the loading state on the products view.
+Also, the same endpoint receives multiple parameters to query and paginate the products and categories.
