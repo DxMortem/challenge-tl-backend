@@ -2,11 +2,13 @@ package com.example.backend.controller;
 
 import com.example.backend.model.Product;
 import com.example.backend.repository.ProductRepository;
+import jakarta.persistence.criteria.Predicate;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -46,13 +50,18 @@ public class ProductsController {
     }
 
     @GetMapping
-    ResponseEntity<PagedModel<Product>> getAllProducts(@RequestParam(required = false, defaultValue = "0") Integer page,
-                                                       @RequestParam(required = false, defaultValue = "2") Integer pageSize)
+    ResponseEntity<PagedModel<Product>> getAllProducts(Pageable pageable, @RequestParam(required = false) String productName)
             throws InterruptedException {
 
+        Specification<Product> specification = (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+            if (productName != null) {
+                predicates.add(criteriaBuilder.like(criteriaBuilder.lower(root.get("name")), "%"+productName.toLowerCase()+"%"));
+            }
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
+        };
         Thread.sleep(2000);
-        Pageable paging = PageRequest.of(page, pageSize);
-        return ResponseEntity.of(Optional.of(new PagedModel<>(productRepository.findAll(paging))));
+        return ResponseEntity.of(Optional.of(new PagedModel<>(productRepository.findAll(specification, pageable))));
     }
 
     @PutMapping("/{id}")
